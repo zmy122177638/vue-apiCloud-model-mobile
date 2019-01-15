@@ -12,7 +12,8 @@
     "register-service-worker": "^1.5.2",
     "vue": "^2.5.21",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vux": "^2.9.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
@@ -29,7 +30,9 @@
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
-    "vue-template-compiler": "^2.5.21"
+    "postcss-pxtorem": "^4.0.1",
+    "vue-template-compiler": "^2.5.21",
+    "vux-loader": "^1.2.9"
   },
   "eslintConfig": {
     "root": true,
@@ -47,13 +50,22 @@
   },
   "postcss": {
     "plugins": {
-      "autoprefixer": {}
+      "autoprefixer": {},
+      "postcss-pxtorem": {
+        "rootValue": 100,
+        "propList": ["*"],
+        "selectorBlackList": []
+      }
     }
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
+    "not dead",
+    "not ie <= 8",
+    "not op_mini all",
+    "last 4 versions",
+    "iOS 7",
+    "Android >= 4.4"
   ],
   "jest": {
     "moduleFileExtensions": [
