@@ -89,6 +89,7 @@ export default {
   opacity: 0;
   transform: translate3d(-100%, 0, 0);
 }
+
 #nav {
   padding: 30px;
   a {
