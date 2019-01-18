@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav" class="color">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
-    </div>
+    <!-- 全局组件 -->
     <transition :name="transitionName">
       <keep-alive :max="10" :include="keepAlive">
         <navigation> <router-view></router-view> </navigation>
@@ -29,7 +26,7 @@ export default {
       }
     });
     // 记录路由,动态给定动画
-    this.$navigation.on("forward", (to, from) => {
+    this.$navigation.on("forward", to => {
       this.transitionName = to.route.meta.isTransition ? "slide-left" : "";
     });
     this.$navigation.on("back", (to, from) => {
