@@ -4,6 +4,7 @@
   var docEl = doc.documentElement;
   var remStyle = document.createElement("style");
   var tid;
+
   function refreshRem() {
     var width = docEl.getBoundingClientRect().width;
     maxWidth = maxWidth || 540;
