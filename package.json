@@ -11,11 +11,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "register-service-worker": "^1.5.2",
+    "vant": "^1.6.6",
     "vue": "^2.5.21",
     "vue-navigation": "^1.1.4",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "vux": "^2.9.2"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
@@ -28,6 +28,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "babel-plugin-import": "^1.11.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
@@ -58,7 +59,9 @@
       "autoprefixer": {},
       "postcss-pxtorem": {
         "rootValue": 100,
-        "propList": ["*"],
+        "propList": [
+          "*"
+        ],
         "selectorBlackList": []
       }
     }

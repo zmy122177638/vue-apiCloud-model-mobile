@@ -1,47 +1,43 @@
-// import Vue from "vue";
+import Vue from "vue";
 import axios from "axios";
 import qs from "qs";
 import envconfig from "./envconfig.js";
-// import * as vux from "vux";
-// console.log(vux);
-// Vue.use(LoadingPlugin);
-// Vue.use(ToastPlugin);
+import { Toast } from "vant";
+Vue.use(Toast);
+
 // 发起请求前
 axios.interceptors.request.use(
   config => {
-    // Vue.$vux.loading.show({
-    //   text: "加载中..."
-    // });
+    Toast.loading({
+      duration: 0, // 持续展示 toast
+      forbidClick: true, // 禁用背景点击
+      loadingType: "spinner",
+      message: "加载中..."
+    });
     if (config.method.toUpperCase() === "POST") {
       config.data = qs.stringify(config.data);
     }
     return config;
   },
   error => {
-    // Vue.$vux.toast.show({
-    //   text: "加载超时",
-    //   type: "warn"
-    // });
+    Toast.fail("加载超时");
     return Promise.reject(error);
   }
 );
 // 发起请求后
 axios.interceptors.response.use(
   res => {
-    // Vue.$vux.loading.hide();
+    Toast.clear();
     return res;
   },
   error => {
     console.log("好多人在访问呀，请重新试试");
-    // Vue.$vux.loading.hide();
+    Toast.clear();
     if (error) {
       let errortime = null;
       clearTimeout(errortime);
       errortime = setTimeout(() => {
-        // Vue.$vux.toast.show({
-        //   text: "加载失败",
-        //   type: "cancel"
-        // });
+        Toast.fail("网络错误");
         clearTimeout(errortime);
       }, 0);
     }

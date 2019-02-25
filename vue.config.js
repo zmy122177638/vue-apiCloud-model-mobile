@@ -25,23 +25,7 @@ module.exports = {
   },
   // webpack配置
   chainWebpack: () => {},
-  configureWebpack: config => {
-    // 尚不能使用Vux 对vcli3目前未做支持
-    require("vux-loader").merge(config, {
-      options: {},
-      plugins: [{
-          name: "vux-ui"
-        },
-        {
-          name: "less-theme",
-          path: "src/common/styles/theme.less"
-        },
-        {
-          name: "duplicate-style"
-        }
-      ]
-    });
-  },
+  configureWebpack: config => {},
   // vue-loader配置
   // vueLoader: {},
   // pwa插件配置

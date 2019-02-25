@@ -28,11 +28,6 @@ export default {
   display: flex;
   flex-direction: column;
 }
-header {
-  height: 100px;
-  line-height: 100px;
-  font-size: 32px;
-}
 .home-main {
   flex: 1;
   overflow-y: scroll;
@@ -45,8 +40,8 @@ footer {
   // bottom: 0;
   // right: 0;
   // left: 0;
-  height: 100px;
-  line-height: 100px;
-  font-size: 32px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
 }
 </style>

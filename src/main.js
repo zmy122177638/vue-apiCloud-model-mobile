@@ -8,7 +8,10 @@ import "@/common/js/rem.js";
 import * as method from "@/common/js/mixin.js";
 import API from "@/api/api";
 import Navigation from "vue-navigation";
-
+// 导入vant所有组件,支持按需加载
+// import Vant from 'vant';
+// import 'vant/lib/index.css';
+// Vue.use(Vant);
 Vue.config.productionTip = false;
 // 全局引入公用方法，也可以在组件中单独引入，推荐在组件中单独引入。
 Vue.prototype.$METHOD = method;
