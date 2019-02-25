@@ -3,7 +3,7 @@
     <!-- 全局组件 -->
     <transition :name="transitionName">
       <keep-alive :max="10" :include="keepAlive">
-        <navigation> <router-view></router-view> </navigation>
+        <router-view></router-view>
       </keep-alive>
     </transition>
   </div>

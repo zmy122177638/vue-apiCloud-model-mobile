@@ -1,8 +1,11 @@
 <template>
   <div class="home-container">
-    <header>首页</header>
-    <main class="home-main"><router-view /></main>
-    <footer><V-tabbar></V-tabbar></footer>
+    <main class="home-main">
+      <router-view />
+    </main>
+    <footer>
+      <V-tabbar></V-tabbar>
+    </footer>
   </div>
 </template>
 

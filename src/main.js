@@ -15,7 +15,11 @@ Vue.prototype.$METHOD = method;
 // 全局引入API
 Vue.prototype.$API = API;
 // 引入路由记录插件
-Vue.use(Navigation, { router, moduleName: "navigation", keyName: "AS" });
+Vue.use(Navigation, {
+  router,
+  moduleName: "navigation",
+  keyName: "AS"
+});
 
 new Vue({
   router,
