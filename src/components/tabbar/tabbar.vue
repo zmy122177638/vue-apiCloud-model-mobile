@@ -13,7 +13,7 @@
       <div class="tabbar-icon"></div>
       <h3 class="tabbar-name">page02</h3>
     </router-link>
-    <router-link to="/page03" tag="li" class="tabbar-item">
+    <router-link to="/about" tag="li" class="tabbar-item">
       <div class="tabbar-icon"></div>
       <h3 class="tabbar-name">page03</h3>
     </router-link>

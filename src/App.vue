@@ -38,8 +38,7 @@ export default {
     });
   },
   mounted() {
-    console.log(this);
-    this.$API.getData({ typeid: 1 }).then(data => {
+    this.$SERVER.getData({ typeid: 1 }).then(data => {
       console.log(data);
     });
   }

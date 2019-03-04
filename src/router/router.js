@@ -20,7 +20,7 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      name: "home",
+      // name: "home",
       component: Home,
       children: [
         {
