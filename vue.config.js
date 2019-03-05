@@ -1,10 +1,28 @@
 const WebpackOnBuildPlugin = require("on-build-webpack");
 const path = require("path");
 const fs = require("fs");
-const buildDir = "./apiCloud/"; // 需要清扫的文件夹
+const { exec, spawn } = require("child_process");
+
+const appname = "apiCloud"; // 项目文件名
+const appPort = 1111; // 真机同步端口,浏览器打开端口。(请与)
+const scriptActive = process.env.npm_lifecycle_event;
+
+if (scriptActive === "watch-build") {
+  // 开启Wifi服务
+  const wifiWorker = spawn(`apicloud wifiStart --port ${appPort}`, {
+    shell: true
+  });
+  wifiWorker.stdout.on("data", function(chunk) {
+    console.log(" " + chunk.toString());
+  });
+  wifiWorker.on("error", err => {
+    console.log("请确保已安装apicloud-cli" + err);
+  });
+}
+
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "" : "/",
-  outputDir: "apiCloud", // 运行时生成的生产环境构建文件的目录(默认""dist""，构建之前会被清除)
+  publicPath: process.env.NODE_ENV === "production" ? "" : "./",
+  outputDir: appname, // 运行时生成的生产环境构建文件的目录(默认""dist""，构建之前会被清除)
   assetsDir: "public", //放置生成的静态资源(s、css、img、fonts)的(相对于 outputDir 的)目录(默认"")
   indexPath: "index.html", //指定生成的 index.html 的输出路径(相对于 outputDir)也可以是一个绝对路径。
   filenameHashing: true, // 是否生产文件名Hash
@@ -29,25 +47,41 @@ module.exports = {
     modules: false // 启用 CSS modules for all css / pre-processor files.
   },
   // webpack配置
-  chainWebpack: config => {},
+  chainWebpack: () => {},
   configureWebpack: config => {
     config.plugins = config.plugins.concat([
       // 删除build时旧的文件
       new WebpackOnBuildPlugin(function(stats) {
         const newlyCreatedAssets = stats.compilation.assets;
         const unlinked = [];
-        const files = fs.readdirSync(path.resolve(buildDir));
+        const files = fs.readdirSync(path.resolve(`./${appname}/`));
         if (files.length) {
           // 过滤一下非js文件
-          let jsFiles = files.filter(f => /.*\.js$/.test(f));
+          let jsFiles = files.filter(f => /.*(\.js|\.json)$/.test(f));
           jsFiles.forEach(file => {
             if (!newlyCreatedAssets[file]) {
-              fs.unlinkSync(path.resolve(buildDir + file));
+              fs.unlinkSync(path.resolve(`./${appname}/${file}`));
               unlinked.push(file);
             }
           });
           if (unlinked.length > 0) {
             console.log("删除文件: ", unlinked);
+          }
+          if (scriptActive === "watch-build") {
+            // 编译完成，真机同步。
+            exec(
+              `apicloud wifiSync --project ./${appname} --updateAll false --port ${appPort}`,
+              (error, stdout) => {
+                if (error) {
+                  console.error(`exec error: ${error}`);
+                  console.log(
+                    `error: wifi真机同步失败，请确保已安装apicloud-cli或已启动Wifi服务`
+                  );
+                  return;
+                }
+                console.log(`stderr: ${stdout}wifi真机同步`);
+              }
+            );
           }
         }
       })
@@ -60,10 +94,9 @@ module.exports = {
   // webpack-dev-server配置
   devServer: {
     // 环境配置
-    // publicPath: "/app/",
     host: "192.168.240.86",
     hot: false,
-    port: 1111,
+    port: appPort,
     https: false,
     hotOnly: false,
     open: false //配置自动启动浏览器
