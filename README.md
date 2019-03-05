@@ -6,16 +6,14 @@
 
 ```
   npm install apicloud-cli -g
+
 ```
 
-安装 vscode 编辑器，下载 apiCloud 插件。
+安装 vscode 编辑器
+
+一切都已经配置好，入手即用。请使用`npm run watch-build`代替`npm run serve`
 
 ---
-
-你必须注意以下问题： 1.你需将 vue-apiCloud-model-mobile 项目放置在 widget 文件夹内，并在 vscode 工作区的第一个，由于 wifi 配置，vscode 默认打开一个路径 2.需在 apiCloud 插件的路径配置 apiCloud 路径
-
-vscode 工作区应为
-widget >> vue-apiCloud-model-mobile >> apiCloud(执行 npm run watch-build 生成的 apiCloud 项目)
 
 ## vue-apiCloud-model-mobile 项目结构
 
@@ -54,7 +52,7 @@ npm install
 ### Compiles and hot-reloads for development
 
 ```
-npm run serve
+npm run watch-build
 ```
 
 ### Compiles and minifies for production
