@@ -10,7 +10,7 @@
     maxWidth = maxWidth || 540;
     width > maxWidth && (width = maxWidth);
     var rem = (width * 100) / designWidth;
-    remStyle.innerHTML = "html{font-size:" + rem * 2 + "px;}";
+    remStyle.innerHTML = "html{font-size:" + rem  + "px;}";
   }
 
   if (docEl.firstElementChild) {

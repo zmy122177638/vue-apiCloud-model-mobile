@@ -10,10 +10,8 @@ import * as method from "@/common/js/mixin.js"; // 引入全局方法
 import API from "@/server/apis.js"; // 引入api接口
 import VConsole from "vconsole";
 import Navigation from "vue-navigation";
-// 导入vant所有组件,支持按需加载
-// import Vant from 'vant';
-// import 'vant/lib/index.css';
-// Vue.use(Vant);
+
+
 Vue.config.productionTip = false;
 // 全局引入公用方法，也可以在组件中单独引入，推荐在组件中单独引入。
 Vue.prototype.$METHOD = method;
@@ -25,11 +23,15 @@ Vue.use(Navigation, {
   moduleName: "navigation",
   keyName: "AS"
 });
-// 开启console调试(正式打包请注释)
-new VConsole();
-// 通过apiID判断是否为app
-if (window.api && window.api.appId === "A6006996353979") {
+
+// const isApp = true; // 手动切换
+// alert(window.navigator.userAgent);
+// 该判断只在云编译环境下才有效 使用isApp变量手动设置环境
+if (window.navigator.userAgent.match(/APICloud/i)) {
   window.apiready = function() {
+    process.env.NODE_ENV === "development" && new VConsole();
+    // 将API链接Vue原型，后续通过this.$APICLOUD代替window.api
+    Vue.prototype.$APICLOUD = window.api;
     new Vue({
       router,
       store,
@@ -37,6 +39,7 @@ if (window.api && window.api.appId === "A6006996353979") {
     }).$mount("#app");
   };
 } else {
+  process.env.NODE_ENV === "development" && new VConsole();
   new Vue({
     router,
     store,

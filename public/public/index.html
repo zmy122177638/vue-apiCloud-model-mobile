@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="renderer" content="webkit">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="Author" content="Anles">
+  <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>转转客4.0</title>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but 转转客 doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+  <script>
+    // fastClick 解决移动端300ms问题
+    if ('addEventListener' in document) {
+      document.addEventListener('DOMContentLoaded', function () {
+        FastClick.attach(document.body);
+      }, false);
+      // 解决fastclick  input获取焦点Bug
+      FastClick.prototype.onTouchEnd = function (event) {
+        if (event.target.hasAttribute("type") && event.target.getAttribute("type") == "date") {
+          return false;
+        }
+      }
+    }
+
+    window.onload = function () {
+      // safari阻止双击放大
+      var lastTouchEnd = 0;
+      document.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 1) {
+          event.preventDefault();
+        }
+      });
+      document.addEventListener('touchend', function (event) {
+        var now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
+      // safari 阻止双指
+      document.addEventListener('gesturestart', function (event) {
+        event.preventDefault();
+      });
+    }
+  </script>
+</body>
+  
+</html>

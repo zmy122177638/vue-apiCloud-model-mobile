@@ -19,12 +19,8 @@ export default {
     };
   },
   created() {
-    // 遍历路由设置keepAlive
-    router.options.routes.map(item => {
-      if (item.meta && item.meta.keepAlive) {
-        this.keepAlive.push(item.name);
-      }
-    });
+    // 递归路由设置KeepAlive  ***** 注意路由name必须和组件内的name一致 *****
+    this.setRouteKeepAlive(router.options.routes);
     // 记录路由,动态给定动画
     this.$navigation.on("forward", to => {
       this.transitionName = to.route.meta.isTransition ? "slide-left" : "";
@@ -38,9 +34,21 @@ export default {
     });
   },
   mounted() {
-    this.$SERVER.getData({ typeid: 1 }).then(data => {
-      console.log(data);
-    });
+    console.log(this.keepAlive); // 设置缓存匹配
+    console.log(this.$APICLOUD); // 只有在apicloud环境下才能获取
+  },
+  methods: {
+    setRouteKeepAlive(routes) {
+      routes.map(item => {
+        if (item.children) {
+          this.setRouteKeepAlive(item.children);
+        } else {
+          if (item.meta && item.meta.keepAlive) {
+            this.keepAlive.push(item.name);
+          }
+        }
+      });
+    }
   }
 };
 </script>
@@ -55,7 +63,6 @@ export default {
     "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   width: 100%;
   height: 100%;
-  text-align: center;
   overflow: hidden;
   background-color: #f5f5f5;
 }
@@ -65,12 +72,16 @@ export default {
 .slide-left-leave-active {
   will-change: transform;
   transition: all 450ms;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
+  backface-visibility: hidden;
+  perspective: 800;
 }
 .slide-right-enter {
-  opacity: 0;
+  opacity: 1;
   transform: translate3d(-100%, 0, 0);
 }
 .slide-right-leave-active {
@@ -78,22 +89,11 @@ export default {
   transform: translate3d(100%, 0, 0);
 }
 .slide-left-enter {
-  opacity: 0;
+  opacity: 1;
   transform: translate3d(100%, 0, 0);
 }
 .slide-left-leave-active {
   opacity: 0;
   transform: translate3d(-100%, 0, 0);
-}
-
-#nav {
-  padding: 15px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>

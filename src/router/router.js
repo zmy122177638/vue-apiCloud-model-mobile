@@ -1,10 +1,27 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "@/views/home/home.vue";
-import Page01 from "@/views/home/subviews/page01.vue";
-import Page02 from "@/views/home/subviews/page02.vue";
-import Page03 from "@/views/home/subviews/page03.vue";
-import Page04 from "@/views/home/subviews/page04.vue";
+
+// tarBar ----- 子页面
+import TabBarView from "@/views/tabBarView/tabBarView.vue";
+// 懒加载
+const Page01 = () =>
+  import(
+    /* webpackChunkName: "page01" */ "@/views/tabBarView/subviews/page01.vue"
+  );
+const Page02 = () =>
+  import(
+    /* webpackChunkName: "page02" */ "@/views/tabBarView/subviews/page02.vue"
+  );
+const Page03 = () =>
+  import(
+    /* webpackChunkName: "page03" */ "@/views/tabBarView/subviews/page03.vue"
+  );
+const Page04 = () =>
+  import(
+    /* webpackChunkName: "page04" */ "@/views/tabBarView/subviews/page04.vue"
+  );
+
+// 内嵌组件
 
 Vue.use(Router);
 
@@ -20,45 +37,41 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      // name: "home",
-      component: Home,
+      component: TabBarView,
       children: [
         {
           path: "",
           name: "page01",
-          component: Page01
+          component: Page01,
+          meta: {
+            keepAlive: true
+          }
         },
         {
           path: "/page02",
           name: "page02",
-          component: Page02
+          component: Page02,
+          meta: {
+            keepAlive: true
+          }
         },
         {
           path: "/page03",
           name: "page03",
-          component: Page03
+          component: Page03,
+          meta: {
+            keepAlive: true
+          }
         },
         {
           path: "/page04",
           name: "page04",
-          component: Page04
+          component: Page04,
+          meta: {
+            keepAlive: true
+          }
         }
       ]
-    },
-    {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "@/views/About.vue"),
-      meta: {
-        title: "大师详情",
-        tabHiiden: true,
-        isTransition: true,
-        keepAlive: false
-      }
     }
   ]
 });
