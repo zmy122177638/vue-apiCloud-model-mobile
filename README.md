@@ -2,13 +2,6 @@
 
 # 安装所需依赖 \*
 
-安装 node.js，安装 apicloud-cli
-
-```
-  npm install apicloud-cli -g
-
-```
-
 安装 vscode 编辑器
 
 一切都已经配置好，入手即用。请使用`npm run watch-build`代替`npm run serve`
