@@ -4,7 +4,10 @@
 
 安装 vscode 编辑器
 
-一切都已经配置好，入手即用。请使用`npm run watch-build`代替`npm run serve`
+一切都已经配置好，入手即用。
+一般我们在H5开发Ui页面，之后再使用watch-build在apicloud环境下联调app环境
+`npm run watch-build` apicloud环境
+`npm run serve` H5环境
 
 ---
 
