@@ -2,23 +2,27 @@ import Vue from "vue";
 import Router from "vue-router";
 
 // tarBar ----- 子页面
-import TabBarView from "@/views/tabBarView/tabBarView.vue";
+import Index from "@/views/index/index.vue";
 // 懒加载
 const Page01 = () =>
   import(
-    /* webpackChunkName: "page01" */ "@/views/tabBarView/subviews/page01.vue"
+    /* webpackChunkName: "page01" */
+    "@/views/index/subviews/page01.vue"
   );
 const Page02 = () =>
   import(
-    /* webpackChunkName: "page02" */ "@/views/tabBarView/subviews/page02.vue"
+    /* webpackChunkName: "page02" */
+    "@/views/index/subviews/page02.vue"
   );
 const Page03 = () =>
   import(
-    /* webpackChunkName: "page03" */ "@/views/tabBarView/subviews/page03.vue"
+    /* webpackChunkName: "page03" */
+    "@/views/index/subviews/page03.vue"
   );
 const Page04 = () =>
   import(
-    /* webpackChunkName: "page04" */ "@/views/tabBarView/subviews/page04.vue"
+    /* webpackChunkName: "page04" */
+    "@/views/index/subviews/page04.vue"
   );
 
 // 内嵌组件
@@ -37,7 +41,7 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      component: TabBarView,
+      component: Index,
       children: [
         {
           path: "",
@@ -72,6 +76,18 @@ const router = new Router({
           }
         }
       ]
+    },
+    {
+      path: "/about",
+      component: () =>
+        import(
+          /* webpackChunkName: "about" */
+          "@/views/about/about.vue"
+        ),
+      meta: {
+        keepAlive: true,
+        isTransition: true
+      }
     }
   ]
 });

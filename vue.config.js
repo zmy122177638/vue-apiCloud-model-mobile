@@ -1,10 +1,7 @@
 const WebpackOnBuildPlugin = require("on-build-webpack");
 const path = require("path");
 const fs = require("fs");
-const {
-  exec,
-  spawn
-} = require("child_process");
+const { exec, spawn } = require("child_process");
 
 const appname = "apiCloud"; // 项目文件名
 const appPort = 1111; // 真机同步端口,浏览器打开端口。(请与)
@@ -15,7 +12,7 @@ if (scriptActive === "watch-build") {
   const wifiWorker = spawn(`apicloud wifiStart --port ${appPort}`, {
     shell: true
   });
-  wifiWorker.stdout.on("data", function (chunk) {
+  wifiWorker.stdout.on("data", function(chunk) {
     console.log(" " + chunk.toString());
   });
   wifiWorker.on("error", err => {
@@ -56,7 +53,7 @@ module.exports = {
   configureWebpack: config => {
     config.plugins = config.plugins.concat([
       // 删除build时旧的文件
-      new WebpackOnBuildPlugin(function (stats) {
+      new WebpackOnBuildPlugin(function(stats) {
         const newlyCreatedAssets = stats.compilation.assets;
         const unlinked = [];
         const files = fs.readdirSync(path.resolve(`./${appname}/`));

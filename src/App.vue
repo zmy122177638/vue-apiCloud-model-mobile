@@ -40,7 +40,7 @@ export default {
   methods: {
     setRouteKeepAlive(routes) {
       routes.map(item => {
-        if (item.children) {
+        if (item.children && Array.isArray(item.children)) {
           this.setRouteKeepAlive(item.children);
         } else {
           if (item.meta && item.meta.keepAlive) {
@@ -63,6 +63,7 @@ export default {
     "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   width: 100%;
   height: 100%;
+  text-align: center;
   overflow: hidden;
   background-color: #f5f5f5;
 }

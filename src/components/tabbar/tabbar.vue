@@ -46,6 +46,11 @@ export default {
     this.tabActiveIndex = this.tabList.findIndex(
       item => item.path === this.$route.path
     );
+    window.addEventListener("popstate", () => {
+      this.tabActiveIndex = this.tabList.findIndex(
+        item => item.path === this.$route.path
+      );
+    });
   },
   methods: {
     switchTab(item, idx) {

@@ -55,7 +55,4 @@ export default {
   // 兼容安卓低版本浏览器
   height: calc(100% - 51px);
 }
-footer {
-  flex-shrink: 0;
-}
 </style>
