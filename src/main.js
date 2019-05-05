@@ -25,7 +25,8 @@ Vue.use(Navigation, {
 
 // const isApp = true; // 手动切换
 // alert(window.navigator.userAgent);
-// 该判断只在云编译环境下才有效 使用isApp变量手动设置环境
+// 该判断只在云编译环境下才有效 使用isApp变量手动设置环境(ios必须要有测试包的情况下，才会携带apicloud标识)
+// 标识可以在config.xml文件userAgent字段设置
 if (window.navigator.userAgent.match(/APICloud/i)) {
   window.apiready = function() {
     process.env.NODE_ENV === "development" && new VConsole();
