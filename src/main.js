@@ -11,7 +11,6 @@ import API from "@/server/apis.js"; // 引入api接口
 import VConsole from "vconsole";
 import Navigation from "vue-navigation";
 
-
 Vue.config.productionTip = false;
 // 全局引入公用方法，也可以在组件中单独引入，推荐在组件中单独引入。
 Vue.prototype.$METHOD = method;

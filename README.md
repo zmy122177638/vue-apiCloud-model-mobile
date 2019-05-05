@@ -5,6 +5,7 @@
 安装 vscode 编辑器
 
 一切都已经配置好，入手即用。
+需要在vue.config.js配置自己当前ip`host: "192.168.1.240"`
 一般我们在H5开发Ui页面，之后再使用watch-build在apicloud环境下联调app环境
 `npm run watch-build` apicloud环境
 `npm run serve` H5环境
@@ -17,7 +18,7 @@
 - public (公共文件)
   - img (公共图片，webpack 不处理，只 copy)
   - js
-    - api.js (apiCloud 至关重要的 api.js)
+    - api.js (apiCloud 可有可无的 api.js)
   - config.xml (apiCloud 至关重要的 config.xml)
   - favicon.ico
   - index.html (模板)
