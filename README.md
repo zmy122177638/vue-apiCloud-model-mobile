@@ -69,7 +69,7 @@ npm install
 ### Compiles and hot-reloads for development
 
 ```
-npm run server
+npm run serve
 ```
 
 ### Compile and hot reload for development and push to APicloud-loader environment WIFI mobile phone synchronization
