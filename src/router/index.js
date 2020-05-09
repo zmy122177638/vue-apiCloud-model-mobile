@@ -85,7 +85,6 @@ const router = new Router({
           '@/views/about/about.vue'
         ),
       meta: {
-        keepAlive: true,
         isTransition: true
       }
     }
