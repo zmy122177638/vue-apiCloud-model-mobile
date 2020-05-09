@@ -38,14 +38,9 @@ export default {
     console.log(this.keepAlive) // 设置缓存匹配
     console.log(this.$APICLOUD) // 只有在apicloud环境下才能获取
     // 接口调用
-    api
-      .getTodayFortune({ typeid: 1 })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(() => {
-        console.log(11111)
-      })
+    api.getTodayFortune({ typeid: 1 }).then(res => {
+      console.log(res)
+    })
   },
   methods: {
     setRouteKeepAlive(routes) {
