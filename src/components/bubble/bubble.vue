@@ -112,10 +112,6 @@ export default {
       ctx.stroke()
       ctx.restore()
     }
-  },
-  watch: {
-    y() {
-    }
   }
 }
 </script>

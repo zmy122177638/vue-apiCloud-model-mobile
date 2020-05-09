@@ -42,12 +42,8 @@ module.exports = {
                 shell: true
               })
               wifiWorker.stdout.on('data', function(chunk) {
-                console.log(
-                  '\\033[32m' +
-                    '【APICloud-cli】:' +
-                    chunk.toString() +
-                    '\\033[0m\n'
-                )
+                /** 严格模式下不允许使用八进制 */
+                console.log('\033[32m【APICloud-cli】:' +chunk.toString() +'\033[0m\n')
               })
               wifiWorker.on('error', err => {
                 console.log('请确保已安装apicloud-cli' + err)
@@ -85,12 +81,7 @@ module.exports = {
                     )
                     return
                   }
-                  console.log(
-                    '\\033[35m' +
-                      '【APICloud-cli】:wifi真机同步成功' +
-                      stdout.toString() +
-                      '\\033[0m\n'
-                  )
+                  console.log('\033[44;30m DONE \033[40;34m '+'【APICloud-cli】:wifi真机同步成功'+'\033[0m')
                 }
               )
             })
