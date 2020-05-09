@@ -87,6 +87,17 @@ const router = new Router({
       meta: {
         isTransition: true
       }
+    },
+    {
+      path: '/example',
+      component: () =>
+        import(
+          /* webpackChunkName: "example" */
+          '@/views/example/example.vue'
+        ),
+      meta: {
+        isTransition: true
+      }
     }
   ]
 })

@@ -115,10 +115,7 @@ export default {
   },
   watch: {
     y() {
-      this._draw()
     }
   }
 }
 </script>
-
-<style scoped lang="scss"></style>

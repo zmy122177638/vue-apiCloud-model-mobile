@@ -9,7 +9,7 @@ export default {
   name: COMPONENT_NAME
 }
 </script>
-<style lang="scss">
+<style lang="less">
 .mf-loading-container {
   img {
     width: 20px;
