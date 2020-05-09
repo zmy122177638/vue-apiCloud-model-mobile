@@ -32,7 +32,7 @@ export default {
        */
       type: Array,
       default() {
-        return [];
+        return []
       },
       required: true
     }
@@ -40,27 +40,27 @@ export default {
   data() {
     return {
       tabActiveIndex: 0
-    };
+    }
   },
   created() {
     this.tabActiveIndex = this.tabList.findIndex(
       item => item.path === this.$route.path
-    );
-    window.addEventListener("popstate", () => {
+    )
+    window.addEventListener('popstate', () => {
       this.tabActiveIndex = this.tabList.findIndex(
         item => item.path === this.$route.path
-      );
-    });
+      )
+    })
   },
   methods: {
     switchTab(item, idx) {
       if (this.tabActiveIndex !== idx) {
-        this.tabActiveIndex = idx;
-        this.$router.push(item.path);
+        this.tabActiveIndex = idx
+        this.$router.push(item.path)
       }
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

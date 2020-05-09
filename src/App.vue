@@ -9,58 +9,64 @@
   </div>
 </template>
 <script>
-import router from "./router";
+import router from './router'
+import api from './api/index'
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
-      transitionName: "",
+      transitionName: '',
       keepAlive: []
-    };
+    }
   },
   created() {
     // 递归路由设置KeepAlive  ***** 注意路由name必须和组件内的name一致 *****
-    this.setRouteKeepAlive(router.options.routes);
+    this.setRouteKeepAlive(router.options.routes)
     // 记录路由,动态给定动画
-    this.$navigation.on("forward", to => {
-      this.transitionName = to.route.meta.isTransition ? "slide-left" : "";
-    });
-    this.$navigation.on("back", (to, from) => {
+    this.$navigation.on('forward', to => {
+      this.transitionName = to.route.meta.isTransition ? 'slide-left' : ''
+    })
+    this.$navigation.on('back', (to, from) => {
       if (to.route.meta.isTransition || from.route.meta.isTransition) {
-        this.transitionName = "slide-right";
+        this.transitionName = 'slide-right'
       } else {
-        this.transitionName = "";
+        this.transitionName = ''
       }
-    });
+    })
   },
   mounted() {
-    console.log(this.keepAlive); // 设置缓存匹配
-    console.log(this.$APICLOUD); // 只有在apicloud环境下才能获取
+    console.log(this.keepAlive) // 设置缓存匹配
+    console.log(this.$APICLOUD) // 只有在apicloud环境下才能获取
     // 接口调用
-    this.$SERVER.getData({ typeid: 1 }).then(res => {
-      console.log(res);
-    });
+    api
+      .getTodayFortune({ typeid: 1 })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(() => {
+        console.log(11111)
+      })
   },
   methods: {
     setRouteKeepAlive(routes) {
       routes.map(item => {
         if (item.children && Array.isArray(item.children)) {
-          this.setRouteKeepAlive(item.children);
+          this.setRouteKeepAlive(item.children)
         } else {
           if (item.meta && item.meta.keepAlive) {
-            this.keepAlive.push(item.name);
+            this.keepAlive.push(item.name)
           }
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="less" scope>
 #app {
-  font-family: Helvetica, Tahoma, Arial, "PingFang SC", "Hiragino Sans GB",
-    "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: Helvetica, Tahoma, Arial, 'PingFang SC', 'Hiragino Sans GB',
+    'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
   width: 100%;
   height: 100%;
   text-align: center;

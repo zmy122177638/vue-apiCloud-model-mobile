@@ -1,33 +1,33 @@
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from 'vue'
+import Router from 'vue-router'
 
 // tarBar ----- 子页面
-import Index from "@/views/index/index.vue";
+import Index from '@/views/index/index.vue'
 // 懒加载
 const Page01 = () =>
   import(
     /* webpackChunkName: "page01" */
-    "@/views/index/subviews/page01.vue"
-  );
+    '@/views/index/subviews/page01.vue'
+  )
 const Page02 = () =>
   import(
     /* webpackChunkName: "page02" */
-    "@/views/index/subviews/page02.vue"
-  );
+    '@/views/index/subviews/page02.vue'
+  )
 const Page03 = () =>
   import(
     /* webpackChunkName: "page03" */
-    "@/views/index/subviews/page03.vue"
-  );
+    '@/views/index/subviews/page03.vue'
+  )
 const Page04 = () =>
   import(
     /* webpackChunkName: "page04" */
-    "@/views/index/subviews/page04.vue"
-  );
+    '@/views/index/subviews/page04.vue'
+  )
 
 // 内嵌组件
 
-Vue.use(Router);
+Vue.use(Router)
 
 const router = new Router({
   /**
@@ -40,36 +40,36 @@ const router = new Router({
    */
   routes: [
     {
-      path: "/",
+      path: '/',
       component: Index,
       children: [
         {
-          path: "",
-          name: "page01",
+          path: '',
+          name: 'page01',
           component: Page01,
           meta: {
             keepAlive: true
           }
         },
         {
-          path: "/page02",
-          name: "page02",
+          path: '/page02',
+          name: 'page02',
           component: Page02,
           meta: {
             keepAlive: true
           }
         },
         {
-          path: "/page03",
-          name: "page03",
+          path: '/page03',
+          name: 'page03',
           component: Page03,
           meta: {
             keepAlive: true
           }
         },
         {
-          path: "/page04",
-          name: "page04",
+          path: '/page04',
+          name: 'page04',
           component: Page04,
           meta: {
             keepAlive: true
@@ -78,11 +78,11 @@ const router = new Router({
       ]
     },
     {
-      path: "/about",
+      path: '/about',
       component: () =>
         import(
           /* webpackChunkName: "about" */
-          "@/views/about/about.vue"
+          '@/views/about/about.vue'
         ),
       meta: {
         keepAlive: true,
@@ -90,6 +90,6 @@ const router = new Router({
       }
     }
   ]
-});
+})
 
-export default router;
+export default router

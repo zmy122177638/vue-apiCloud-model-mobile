@@ -11,7 +11,7 @@
 
 <script>
 // @ is an alias to /src
-import Tabbar from "@/components/tabbar/tabbar.vue";
+import Tabbar from '@/components/tabbar/tabbar.vue'
 
 export default {
   components: {
@@ -21,25 +21,25 @@ export default {
     return {
       tabList: [
         {
-          title: "page01",
-          path: "/"
+          title: 'page01',
+          path: '/'
         },
         {
-          title: "page02",
-          path: "/page02"
+          title: 'page02',
+          path: '/page02'
         },
         {
-          title: "page03",
-          path: "/page03"
+          title: 'page03',
+          path: '/page03'
         },
         {
-          title: "page04",
-          path: "/page04"
+          title: 'page04',
+          path: '/page04'
         }
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

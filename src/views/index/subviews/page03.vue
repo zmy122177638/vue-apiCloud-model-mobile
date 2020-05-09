@@ -4,9 +4,9 @@
 
 <script>
 export default {
-  name: "page03",
+  name: 'page03',
   components: {}
-};
+}
 </script>
 
 <style></style>

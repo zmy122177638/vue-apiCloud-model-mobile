@@ -1,16 +1,16 @@
-import Vue from "vue";
-import { WechatPlugin } from "vux";
-Vue.use(WechatPlugin); //  微信
-const wx = Vue.WechatPlugin;
+import Vue from 'vue'
+import { WechatPlugin } from 'vux'
+Vue.use(WechatPlugin) //  微信
+const wx = Vue.WechatPlugin
 
 export const isWeixin = () => {
-  let ua = navigator.userAgent.toLowerCase();
+  let ua = navigator.userAgent.toLowerCase()
   if(ua.match(/MicroMessenger/i)=="micromessenger") { //eslint-disable-line
-    return true;
+    return true
   } else {
-    return false;
+    return false
   }
-};
+}
 
 /**
  * 微信分享
@@ -20,7 +20,7 @@ export const isWeixin = () => {
  */
 export const wxShare = (sd, sharobj, href, success) => {
   // 判断是否为微信浏览器
-  if (!isWeixin()) return false;
+  if (!isWeixin()) return false
   wx.config({
     debug: false,
     appId: sd.appid,
@@ -28,16 +28,16 @@ export const wxShare = (sd, sharobj, href, success) => {
     nonceStr: sd.noncestr,
     signature: sd.signature,
     jsApiList: [
-      "onMenuShareTimeline",
-      "onMenuShareAppMessage",
-      "onMenuShareQQ",
-      "onMenuShareWeibo",
-      "onMenuShareQZone",
-      "checkJsApi",
-      "openLocation",
-      "getLocation"
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage',
+      'onMenuShareQQ',
+      'onMenuShareWeibo',
+      'onMenuShareQZone',
+      'checkJsApi',
+      'openLocation',
+      'getLocation'
     ]
-  });
+  })
   wx.ready(function() {
     wx.onMenuShareTimeline({
       title: sharobj.share_title, // 分享标题
@@ -46,69 +46,69 @@ export const wxShare = (sd, sharobj, href, success) => {
       link: href, // 分享链接
       imgUrl: sharobj.thumb, // 分享图标
       success: function() {
-        success && success();
+        success && success()
         // alert("分享到朋友圈成功")
       },
       cancel: function() {
         // alert("分享失败,您取消了分享!")
       }
-    });
+    })
     wx.onMenuShareAppMessage({
       title: sharobj.share_title, // 分享标题
       desc: sharobj.share_description, // 分享描述
       link: href, // 分享链接
       imgUrl: sharobj.thumb, // 分享图标
       success: function() {
-        success && success();
+        success && success()
         // alert("成功分享给朋友")
       },
       cancel: function() {
         // alert("分享失败,您取消了分享!")
       }
-    });
+    })
     wx.onMenuShareQQ({
       title: sharobj.share_title, // 分享标题
       desc: sharobj.share_description, // 分享描述
       link: href, // 分享链接
       imgUrl: sharobj.thumb, // 分享图标
       success: function() {
-        success && success();
+        success && success()
       },
       cancel: function() {}
-    });
+    })
     wx.onMenuShareWeibo({
       title: sharobj.share_title, // 分享标题
       desc: sharobj.share_description, // 分享描述
       link: href, // 分享链接
       imgUrl: sharobj.thumb, // 分享图标
       success: function() {
-        success && success();
+        success && success()
         // alert("成功分享给朋友")
       },
       cancel: function() {
         // alert("分享失败,您取消了分享!")
       }
-    });
+    })
     wx.onMenuShareQZone({
       title: sharobj.share_title, // 分享标题
       desc: sharobj.share_description, // 分享描述
       link: href, // 分享链接
       imgUrl: sharobj.thumb, // 分享图标
       success: function() {
-        success && success();
+        success && success()
         // alert("成功分享给朋友")
       },
       cancel: function() {
         // alert("分享失败,您取消了分享!")
       }
-    });
-  });
-  wx.error(function(res) {
+    })
+  })
+  wx.error(function() {
     // alert(JSON.stringify(res))
     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，
     // 对于SPA可以在这里更新签名。
-  });
-};
+  })
+}
 
 /**
  * 微信支付
@@ -123,8 +123,8 @@ export const wxpay = (sd, paysd, cb, cancelCb) => {
     timestamp: sd.timestamp,
     nonceStr: sd.nonceStr,
     signature: sd.signature,
-    jsApiList: ["chooseWXPay"]
-  });
+    jsApiList: ['chooseWXPay']
+  })
   wx.ready(function() {
     wx.chooseWXPay({
       timestamp: paysd.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
@@ -134,18 +134,18 @@ export const wxpay = (sd, paysd, cb, cancelCb) => {
       paySign: paysd.paySign, // 支付签名
       success: function(res) {
         // 支付成功后的回调函数
-        cb(res);
+        cb(res)
       },
       cancel: function(res) {
         // 取消支付后的回调函数
-        cancelCb(res);
+        cancelCb(res)
       }
-    });
-  });
-  wx.error(function(res) {
+    })
+  })
+  wx.error(function() {
     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看
-  });
-};
+  })
+}
 /**
  * 图片预览
  * @param {数组中当前图片链接} src
@@ -155,5 +155,5 @@ export const wximgview = (src, imgPaths) => {
   wx.previewImage({
     current: src,
     urls: imgPaths
-  });
-};
+  })
+}
